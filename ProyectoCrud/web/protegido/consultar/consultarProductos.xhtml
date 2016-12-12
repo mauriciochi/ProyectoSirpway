@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template="./../../WEB-INF/templates/templateUniversal.xhtml">
+
+            <ui:define name="title">
+                Consultar Productos
+            </ui:define>
+
+            <ui:define name="content">
+                <h:outputStylesheet name="./css/cssLayout.css"/>
+
+                <f:view>
+
+
+                    <h:form>
+                        <p:dataTable value="#{productoController.consultarTodos()}" var="item" widgetVar="carsTable" emptyMessage="No cars found with given criteria" filteredValue="#{productoController.consultarTodos()}">
+                            <f:facet name="header">
+                                            <p:outputPanel>
+                                                    <h:outputText value="Filtra los productos" />
+                                                    <p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                                </p:outputPanel>
+                                        </f:facet>
+
+                            <p:column filterBy="#{item.idProductos}" headerText="Codigo del Producto"  filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="IdProductos"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idProductos}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.nombreProducto}" headerText="Nombre del Producto"  filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="NombreProducto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombreProducto}"/>
+                            </p:column>
+                            <p:column filterBy="#{item.precioProducto}" headerText="Precio del Producto"  filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="PrecioProducto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.precioProducto}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </h:form>
+                </f:view>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
